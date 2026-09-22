@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2=".4" y2="1">
+      <stop offset="0" stop-color="#FFF6DC"/><stop offset="1" stop-color="#F7EBD0"/>
+    </linearGradient>
+    <linearGradient id="gold" x1=".2" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#FFEA90"/><stop offset=".45" stop-color="#F9D150"/><stop offset="1" stop-color="#EEB329"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <!-- 一個「被控制點包住的圖形」：這支工具在做的就是這件事 -->
+  <g transform="translate(256 262) scale(3.05) translate(-60 -58)">
+    <path d="M22 78 C14 56 26 26 54 22 C84 18 102 40 100 64 C98 88 76 100 56 96 C40 93 28 88 22 78 Z"
+          fill="url(#gold)" stroke="#46293E" stroke-width="7" stroke-linejoin="round"/>
+    <circle cx="44" cy="54" r="5.2" fill="#46293E"/>
+    <path d="M62 70 C72 74 80 72 86 64" stroke="#46293E" stroke-width="6" stroke-linecap="round" fill="none"/>
+  </g>
+  <g fill="#fff" stroke="#2F7FD8" stroke-width="9">
+    <circle cx="112" cy="128" r="17"/><circle cx="400" cy="128" r="17"/>
+    <circle cx="112" cy="392" r="17"/><circle cx="400" cy="392" r="17"/>
+  </g>
+</svg>

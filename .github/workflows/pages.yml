@@ -1,0 +1,42 @@
+name: 部署到 GitHub Pages
+
+# 這是一支純靜態 App，沒有建置步驟——但**不是**「把檔案丟上去就好」。
+# 上線前先跑一次結構檢查：版本號三處是否一致、SW 有沒有漏快取新檔案。
+# 那兩件事壞掉都不會有任何錯誤訊息，只會讓使用者永遠更新不到新版。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: 檢查（版本一致性、SW 快取清單、語法）
+        run: node scripts/check.mjs
+      - uses: actions/configure-pages@v5
+        with: { enablement: true }   # repo 還沒開 Pages 時自動開起來
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: '.' }
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

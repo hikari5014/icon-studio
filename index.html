@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>圖示動畫工作台</title>
+<meta name="description" content="從零畫出你自己的動態 icon，匯出成 SVG／CSS／React／Vue／PNG。離線可用，什麼都不上傳。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<meta name="theme-color" content="#F9D150">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header id="bar">
+  <button class="ic" id="menuBtn" title="選單" aria-label="選單">☰</button>
+  <strong class="brand">圖示動畫工作台</strong>
+  <input id="docName" class="name" aria-label="設計名稱" value="未命名">
+  <span class="sp"></span>
+  <button class="btn" id="btnNew">新建</button>
+  <button class="btn" id="btnOpen">開啟</button>
+  <button class="btn" id="btnImport">匯入</button>
+  <button class="btn pri" id="btnExport">匯出</button>
+  <button class="ic" id="btnUndo" title="復原 Ctrl+Z" aria-label="復原">↶</button>
+  <button class="ic" id="btnRedo" title="重做 Ctrl+Shift+Z" aria-label="重做">↷</button>
+  <button class="ic" id="btnHelp" title="說明 ?" aria-label="說明">?</button>
+  <button class="ic" id="btnTheme" title="深／淺色" aria-label="深淺色">◐</button>
+  <button class="ic ver" id="btnVer" title="版本與更新">v—</button>
+</header>
+
+<main id="app">
+  <!-- ══ 左：工具 ＋ 圖層 ══ -->
+  <aside class="col left" id="leftCol">
+    <div class="tools" id="tools" role="toolbar" aria-label="工具"></div>
+
+    <section class="pane">
+      <h2>圖層 <span class="hintq" data-tip="由上到下＝由前到後。上面的會蓋住下面的。">?</span></h2>
+      <div class="layerList" id="layerList"></div>
+      <div class="rowBtns">
+        <button class="btn sm" id="layAdd">＋ 造型</button>
+        <button class="btn sm" id="layDup">複製</button>
+        <button class="btn sm danger" id="layDel">刪除</button>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ══ 中：畫布 ══ -->
+  <section class="col center">
+    <div class="canvasWrap">
+      <svg id="stage" viewBox="0 0 120 120" aria-label="畫布"></svg>
+      <div class="canvasTip" id="canvasTip"></div>
+    </div>
+
+    <div class="timeline">
+      <button class="btn" id="btnPlay">⏸</button>
+      <input type="range" id="scrub" min="0" max="1600" value="0" aria-label="時間軸">
+      <span class="tnum" id="tnum">0 ms</span>
+      <label class="chk"><input type="checkbox" id="chkHandles" checked> 控制點</label>
+      <label class="chk"><input type="checkbox" id="chkGrid" checked> 格線</label>
+    </div>
+
+    <div class="previews" id="previews"></div>
+  </section>
+
+  <!-- ══ 右：屬性 ＋ 資料庫 ══ -->
+  <aside class="col right" id="rightCol">
+    <div class="tabs" id="tabs">
+      <button data-tab="props" class="on">屬性</button>
+      <button data-tab="anim">動畫</button>
+      <button data-tab="color">配色</button>
+      <button data-tab="lib">資料庫</button>
+    </div>
+    <div class="tabpane on" id="tab-props"></div>
+    <div class="tabpane" id="tab-anim"></div>
+    <div class="tabpane" id="tab-color"></div>
+    <div class="tabpane" id="tab-lib"></div>
+  </aside>
+</main>
+
+<!-- ══ 彈窗 ══ -->
+<dialog id="dlg">
+  <div class="dlgHead"><strong id="dlgTitle"></strong><button class="ic" id="dlgX" aria-label="關閉">✕</button></div>
+  <div id="dlgBody"></div>
+</dialog>
+
+<input type="file" id="fileAny" hidden accept=".json,.svg,image/*">
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
